@@ -13,7 +13,7 @@ var errorHandler = function * (next) {
 };
 
 app.use(function *(next) {
-    if(this.path == '/')
+    if(this.path == '/hello-world')
         this.body = 'Hello World';
     yield next;
 });

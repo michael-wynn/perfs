@@ -6,9 +6,8 @@
   "scripts": {
     "all": "./tests/wrk-all.sh",
     "isolated": "./tests/wrk-all.sh isolated/",
-    "isolated-hello": "./tests/wrk-all.sh isolated/ hello-world/",
-    "normal": "./tests/wrk-all.sh normal/",
-    "normal-hello": "./tests/wrk-all.sh normal/ hello-world/"
+    "static-effect": "./tests/wrk-all.sh static-effect/",
+    "realistic": "./tests/wrk-all.sh realistic/"
   },
   "repository": {
     "type": "git",

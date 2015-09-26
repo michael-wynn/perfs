@@ -1,9 +1,0 @@
-#========= tests/isolated/hello-world/necklace.app.js ==========
-Running 10s test @ http://localhost:4830
-  2 threads and 1000 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    95.65ms   71.80ms   1.22s    97.74%
-    Req/Sec     4.64k     0.99k    6.70k    73.23%
-  92242 requests in 10.02s, 13.37MB read
-Requests/sec:   9206.79
-Transfer/sec:      1.33MB

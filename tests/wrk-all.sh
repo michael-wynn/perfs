@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+
+export THREADS=2
+export CONNECTIONS=1000
+export DURATION=3s
+export TIMEOUT=5s
+
 GRP=$1
 TST=$2
 SUBJ=$3
@@ -11,11 +17,6 @@ APPFILE="app.js"
 TESTSCRIPT="test.wrk.sh"
 OUTEXTENSION="result"
 ALLRESULTS="tests/wrk-all.result"
-
-export THREADS=2
-export CONNECTIONS=1000
-export DURATION=10s
-export TIMEOUT=5s
 
 #clear consolidated results
 echo "Performance test results:" > $ALLRESULTS

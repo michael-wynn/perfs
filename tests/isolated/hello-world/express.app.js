@@ -2,7 +2,7 @@
 var express = require('express');
 var app = express();
 
-app.use('/', function (req, res, next) {
+app.use('/hello-world', function (req, res, next) {
     res.setHeader('content-type', 'text/plain; charset=utf-8');
     res.end('Hello World');
 });
