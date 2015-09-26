@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 clear
+EMPTY=
 THIS=`readlink -f ${0%/*}`
 SUITES=$1
 SRVNAMES=$2
@@ -8,18 +9,18 @@ APPFILE="app.js"
 TESTSCRIPT="test.wrk.sh"
 OUTEXTENSION="result"
 
-echo SUITES: $SUITES
-if [ $SUITES ==  ]
+if [ X$SUITES == X$EMPTY ]
     then
-        SUITES=`ls -d tests/*/`
+#        SUITES=`ls -d tests/*/`
+        SUITES=(hello-world-in-isolation hello-world-normal)
 fi
 
-if [ $SRVNAMES == ]
+if [ X$SRVNAMES == X$EMPTY ]
     then SRVNAMES=(necklace express koa)
 fi
 
 
-for SUITE in $SUITES
+for SUITE in ${SUITES[*]}
 do
     for SRVNAME in ${SRVNAMES[*]}
     do
@@ -42,13 +43,14 @@ do
         sleep 1
 
         #run test
+        echo Testinging in progress...
         $TESTCMD > $RESULT
-        echo Test done, results written to ${RESULT##*/}
+        echo Done, results written to ${RESULT##*/}
         echo
         cat $RESULT
 
         #stop server
-        echo Stopping server
+#        echo Stopping server
         kill -s STOP $PID
         echo
     done
