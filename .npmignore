@@ -1,0 +1,8 @@
+node_modules
+tests/**/*.result
+.idea
+.npm
+.npmignore
+.gitignore
+
+

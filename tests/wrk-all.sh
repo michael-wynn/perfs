@@ -61,7 +61,7 @@ do
 #            echo APPSTART: $APPSTART
 #            echo TESTCMD: $TESTCMD
 
-            #start htp server & wait for spin-up
+            #start http server & wait for spin-up
             $APPSTART &
             PID=$!
             sleep 1
@@ -72,7 +72,7 @@ do
             cat $RESULT
             echo Done, results written to $RESULT
 
-            #stop server
+            #stop http server
             kill -s STOP $PID
             echo
 
