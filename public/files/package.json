@@ -1,0 +1,61 @@
+{
+  "name": "webnest",
+  "version": "0.0.0",
+  "description": "Fast, robust promise-based web server",
+  "_main": "index.js",
+  "scripts": {
+    "start": "nodemon ./tests/servers/functional.js 3002",
+    "test": "mocha tests/specs --recursive",
+    "count": "./scripts/count.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitsrv:repo/csim-web-server"
+  },
+  "author": "Michael Wynn",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.9.34",
+    "csim-guid": "^1.0.2",
+    "destroy": "^1.0.3",
+    "etag": "^1.7.0",
+    "keygrip": "^1.0.1",
+    "mime": "^1.3.4",
+    "on-finished": "^2.3.0",
+    "send": "^0.13.0",
+    "serve-static": "^1.10.0",
+    "statuses": "^1.2.1"
+  },
+  "devDependencies": {
+    "better-assert": "^1.0.2",
+    "co-views": "^2.1.0",
+    "consolidate": "^0.13.1",
+    "debug": "^2.2.0",
+    "ejs": "^2.3.4",
+    "gulp": "^3.9.0",
+    "gulp-strip-comments": "^1.0.1",
+    "handlebars": "^4.0.2",
+    "jade": "^1.11.0",
+    "mocha": "^2.3.0",
+    "node-session": "0.0.1-alpha.2",
+    "q": "^1.4.1",
+    "req-fast": "^0.2.8",
+    "strip-comments": "^0.3.2",
+    "tough-cookie": "^2.0.0"
+  },
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "keywords": [
+    "web",
+    "server",
+    "enterprise-grade",
+    "enterprise",
+    "promise",
+    "promise-based",
+    "bluebird",
+    "resilience"
+  ]
+}
