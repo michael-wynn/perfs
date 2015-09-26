@@ -1,0 +1,30 @@
+{
+  "name": "necklace-performance-tests",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "all": "./tests/wrk-all.sh",
+    "isolated": "./tests/wrk-all.sh isolated/",
+    "isolated-hello": "./tests/wrk-all.sh isolated/ hello-world/",
+    "normal": "./tests/wrk-all.sh normal/",
+    "normal-hello": "./tests/wrk-all.sh normal/ hello-world/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitsrv:repo/necklace-performance-tests"
+  },
+  "author": "Michael Wynn",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "koa": "^1.0.0",
+    "mach": "^1.3.8",
+    "mysql2": "^0.15.8",
+    "necklace": "0.0.0",
+    "necklace-static-file": "0.0.1",
+    "necklace-static-folder": "0.0.1"
+  }
+}

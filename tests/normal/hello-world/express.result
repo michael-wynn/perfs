@@ -1,0 +1,9 @@
+#========= tests/normal/hello-world/express.app.js ==========
+Running 10s test @ http://localhost:4834
+  2 threads and 1000 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   205.72ms   55.31ms 796.38ms   82.36%
+    Req/Sec     2.13k     0.88k    3.89k    60.51%
+  42295 requests in 10.09s, 7.06MB read
+Requests/sec:   4190.18
+Transfer/sec:    716.10KB

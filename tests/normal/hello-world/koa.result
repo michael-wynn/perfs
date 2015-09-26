@@ -1,0 +1,9 @@
+#========= tests/normal/hello-world/koa.app.js ==========
+Running 10s test @ http://localhost:4835
+  2 threads and 1000 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   356.97ms  123.84ms   1.29s    79.01%
+    Req/Sec     1.17k   771.59     2.96k    58.39%
+  21131 requests in 10.04s, 3.06MB read
+Requests/sec:   2104.40
+Transfer/sec:    312.37KB

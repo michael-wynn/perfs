@@ -1,60 +1,83 @@
 #!/usr/bin/env bash
+GRP=$1
+TST=$2
+SUBJ=$3
+
 clear
 EMPTY=
 THIS=`readlink -f ${0%/*}`
-SUITES=$1
-SRVNAMES=$2
-PORT=4000
+PORT=4827   #arbitrary seed, will increment before each test
 APPFILE="app.js"
 TESTSCRIPT="test.wrk.sh"
 OUTEXTENSION="result"
+ALLRESULTS="tests/wrk-all.result"
 
-if [ X$SUITES == X$EMPTY ]
+export THREADS=2
+export CONNECTIONS=1000
+export DURATION=10s
+export TIMEOUT=5s
+
+#clear consolidated results
+echo "Performance test results:" > $ALLRESULTS
+
+if [ X$GRP == X$EMPTY ]
     then
-#        SUITES=`ls -d tests/*/`
-        SUITES=(hello-world-in-isolation hello-world-normal)
+        TESTGROUPS=`ls -d tests/*/`
+    else
+        TESTGROUPS=(tests/$GRP)
 fi
 
-if [ X$SRVNAMES == X$EMPTY ]
-    then SRVNAMES=(necklace express koa)
-fi
-
-
-for SUITE in ${SUITES[*]}
+for TESTGROUP in ${TESTGROUPS[*]}
 do
-    for SRVNAME in ${SRVNAMES[*]}
+    if [ X$TST == X$EMPTY ]
+        then
+            TESTS=`ls -d $TESTGROUP*/`
+        else
+            TESTS=($TESTGROUP)
+    fi
+    for TEST in ${TESTS[*]}
     do
-        echo ==== $SRVNAME \($SUITE\) =====
-        PORT=$((PORT + 1))
-        APPSTART=node\ $THIS/$SUITE/$SRVNAME.$APPFILE\ $PORT
-        TESTCMD=$THIS/$SUITE/$TESTSCRIPT\ $PORT
-        RESULT=$THIS/$SUITE/$SRVNAME.$OUTEXTENSION
+        if [ X$SUBJ == X$EMPTY ]
+            then
+                SUBJECTS=`ls -d $TEST*.js`
+            else
+                SUBJECTS=($TEST$SUBJ)
+        fi
+        for SUBJECT in ${SUBJECTS[*]}
+        do
+            echo in progress: $SUBJECT ...
 
-#        echo SUITE: $SUITE
-#        echo SRVNAME: $SRVNAME
-#        echo PORT: $PORT
-#        echo APPSTART: $APPSTART
-#        echo TESTCMD: $TESTCMD
-#        echo RESULT: $RESULT
+            RESULT=${SUBJECT/app.js/$OUTEXTENSION}
+            PORT=$((PORT + 1))
+            APPSTART=node\ $SUBJECT\ $PORT
+            TESTCMD=$TEST$TESTSCRIPT\ $PORT
 
-        #start htp server & wait for spin-up
-        $APPSTART &
-        PID=$!
-        sleep 1
 
-        #run test
-        echo Testinging in progress...
-        $TESTCMD > $RESULT
-        echo Done, results written to ${RESULT##*/}
-        echo
-        cat $RESULT
+#            echo TESTGROUP: $TESTGROUP
+#            echo TEST: $TEST
+#            echo SUBJECT: $SUBJECT
+#            echo PORT: $PORT
+#            echo RESULT: $RESULT
+#            echo APPSTART: $APPSTART
+#            echo TESTCMD: $TESTCMD
 
-        #stop server
-#        echo Stopping server
-        kill -s STOP $PID
-        echo
+            #start htp server & wait for spin-up
+            $APPSTART &
+            PID=$!
+            sleep 1
+
+            #run test
+            echo "#========= $SUBJECT ==========" > $RESULT
+            $TESTCMD >> $RESULT
+            cat $RESULT
+            echo Done, results written to $RESULT
+
+            #stop server
+            kill -s STOP $PID
+            echo
+
+            cat $RESULT >> $ALLRESULTS
+        done
+        echo "" >> $ALLRESULTS
     done
 done
-
-
-#$THIS/necklace/wrk.sh
