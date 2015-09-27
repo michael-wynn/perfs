@@ -1,5 +1,9 @@
 'use strict';
+'use strict';
 var Koa = require('koa');
+var common = require('../../../lib/common.js');
+var jade = require('koa-jade-render');
+
 var app = new Koa;
 
 var errorHandler = function * (next) {
@@ -13,9 +17,14 @@ var errorHandler = function * (next) {
 };
 
 app.use(errorHandler);
+
+app.use(jade(common.jadeViews));
+
 app.use(function *(next) {
-    if(this.path == '/hello-world')
-        this.body = 'Hello World';
+    if(this.path == '/jade') {
+        common.jadeData.cache = true;
+        yield this.render('welcome.jade', common.jadeData);
+    }
     yield next;
 });
 

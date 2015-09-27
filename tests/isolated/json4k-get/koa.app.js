@@ -1,5 +1,7 @@
 'use strict';
 var Koa = require('koa');
+var common = require('../../../lib/common');
+
 var app = new Koa;
 
 var errorHandler = function * (next) {
@@ -14,8 +16,8 @@ var errorHandler = function * (next) {
 
 app.use(errorHandler);
 app.use(function *(next) {
-    if(this.path == '/hello-world')
-        this.body = 'Hello World';
+    if(this.path == '/json-4k')
+        this.body = common.json4k;
     yield next;
 });
 

@@ -1,5 +1,7 @@
 'use strict';
 var Koa = require('koa');
+var common = require('../../../lib/common');
+
 var app = new Koa;
 
 var errorHandler = function * (next) {
@@ -14,8 +16,14 @@ var errorHandler = function * (next) {
 
 app.use(errorHandler);
 app.use(function *(next) {
-    if(this.path == '/hello-world')
-        this.body = 'Hello World';
+    if(this.path == '/mysql-get') {
+        var context = this;
+        var promise = common.mysqlExecute(common.query.mysqlGet)
+            .then(function(data){
+                context.body = data[0];
+            });
+        yield Promise.resolve(promise);    //must wrap in es6 promise to work
+    }
     yield next;
 });
 

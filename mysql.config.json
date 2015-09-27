@@ -1,0 +1,7 @@
+{
+  "user": "dev",
+  "password": "blue96jade",
+  "host": "mysql1",
+  "database": "testdb",
+  "connectionLimit": 20
+}
