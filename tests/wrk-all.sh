@@ -4,6 +4,7 @@ export THREADS=2
 export CONNECTIONS=1000
 export DURATION=3s
 export TIMEOUT=5s
+export DELAY=1
 
 GRP=$1
 TST=$2
@@ -25,7 +26,7 @@ if [ X$GRP == X$EMPTY ]
     then
         TESTGROUPS=`ls -d tests/*/`
     else
-        TESTGROUPS=(tests/$GRP)
+        TESTGROUPS=(tests/$GRP/)
 fi
 
 for TESTGROUP in ${TESTGROUPS[*]}
@@ -34,7 +35,7 @@ do
         then
             TESTS=`ls -d $TESTGROUP*/`
         else
-            TESTS=($TESTGROUP)
+            TESTS=($TESTGROUP$TST/)
     fi
     for TEST in ${TESTS[*]}
     do
@@ -42,7 +43,7 @@ do
             then
                 SUBJECTS=`ls -d $TEST*.js`
             else
-                SUBJECTS=($TEST$SUBJ)
+                SUBJECTS=($TEST$SUBJ\.app.js)
         fi
         for SUBJECT in ${SUBJECTS[*]}
         do
@@ -65,7 +66,7 @@ do
             #start http server & wait for spin-up
             $APPSTART &
             PID=$!
-            sleep 1
+            sleep $DELAY
 
             #run test
             echo "#========= $SUBJECT ==========" > $RESULT

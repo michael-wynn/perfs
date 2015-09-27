@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "all": "./tests/wrk-all.sh",
-    "isolated": "./tests/wrk-all.sh isolated/",
-    "static-effect": "./tests/wrk-all.sh static-effect/",
-    "realistic": "./tests/wrk-all.sh realistic/"
+    "start": "./tests/wrk-all.sh",
+    "test": "./tests/wrk-all.sh"
   },
   "repository": {
     "type": "git",

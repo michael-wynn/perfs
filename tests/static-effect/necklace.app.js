@@ -8,7 +8,7 @@ var files = new StaticFolder('files');
 
 app
     .mount(files)
-    .point('hello-world', function () {
+    .mount('hello-world', function () {
     this.sendText('Hello World');
 })
 ;
