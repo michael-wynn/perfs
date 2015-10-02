@@ -4,5 +4,6 @@ tests/**/*.result
 .npm
 .npmignore
 .gitignore
+mysql.private.json
 
 

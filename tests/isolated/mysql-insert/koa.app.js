@@ -1,6 +1,9 @@
 'use strict';
 var Koa = require('koa');
 var common = require('../../../lib/common');
+var parse = require('co-body');
+
+var printed = false;
 
 var app = new Koa;
 
@@ -16,18 +19,34 @@ var errorHandler = function * (next) {
 
 app.use(errorHandler);
 app.use(function *(next) {
-    if(this.path == '/mysql-get') {
+    if(this.path == '/mysql-insert') {
         var context = this;
-        var promise = common.mysqlExecute(common.query.mysqlGet)
-            .then(function(data){
-                context.body = data[0];
-            });
-        yield Promise.resolve(promise);    //must wrap in es6 promise to work
+        var reply;
+        var thisPromise = parse(this)
+            .then(function(rows) {
+                reply = {received: `${rows.length} rows`};//reply
+                var promises = rows.map(function(row){
+                    return common.mysql.insertRow(1, row);
+                });
+                return common.Promise.all(promises)})
+            .then(function(){
+                context.body = reply;
+                if(!printed){
+                    printed = true;
+                    console.log(reply);
+                }
+            })
+        yield Promise.resolve(thisPromise);    //must wrap in es6 promise to work
     }
     yield next;
 });
 
-app.listen(+process.argv[2] || 3000);
 process.on('STOP', function () {
     process.exit(0)
 });
+
+common.mysql.initialize()
+    .then(function(){
+        app.listen(+process.argv[2] || 3000);
+    })
+

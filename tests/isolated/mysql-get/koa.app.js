@@ -18,16 +18,21 @@ app.use(errorHandler);
 app.use(function *(next) {
     if(this.path == '/mysql-get') {
         var context = this;
-        var promise = common.mysqlExecute(common.query.mysqlGet)
+        var promise = common.mysql.selectAll()
             .then(function(data){
-                context.body = data[0];
+                context.body = data;
             });
         yield Promise.resolve(promise);    //must wrap in es6 promise to work
     }
     yield next;
 });
 
-app.listen(+process.argv[2] || 3000);
 process.on('STOP', function () {
     process.exit(0)
 });
+
+common.mysql.initialize()
+    .then(function(){
+        app.listen(+process.argv[2] || 3000);
+    })
+

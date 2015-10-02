@@ -3,7 +3,7 @@ var necklace = require('necklace');
 var common = require('../../../lib/common.js');
 
 var app = new necklace.App();
-app.registerViewEngine('jade', common.jadeViews, '.jade')
+app.registerViewEngine('jade', common.jadeViewsDir, '.jade')
     .mount('jade', function () {
         this.render('jade', 'welcome', {title: 'Jade performance test', date: new Date});
     });

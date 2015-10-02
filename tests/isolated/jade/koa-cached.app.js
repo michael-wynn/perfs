@@ -18,7 +18,7 @@ var errorHandler = function * (next) {
 
 app.use(errorHandler);
 
-app.use(jade(common.jadeViews));
+app.use(jade(common.jadeViewsDir));
 
 app.use(function *(next) {
     if(this.path == '/jade') {

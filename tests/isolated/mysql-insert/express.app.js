@@ -1,25 +1,29 @@
 'use strict';
 var express = require('express');
 var common = require('../../../lib/common');
+var bodyParser = require('body-parser');
+
+var printed = false;
 
 var app = express();
+app.use(bodyParser.json());
 
-app.get('/mysql-get', function (req, res, next) {
-    return common.mysqlExecute(common.query.mysqlGet)
-        .then(function (data) {
-            res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify(data[0]));
-        })
-        .catch(next)    //will not handle promise errors properly without this
-        ;
-})
-    .use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            stack: err.stack
-        });
+app.use('/mysql-insert', function (req, res, next) {
+    var rows = req.body;
+    var promises = rows.map(function(row){
+        return common.mysql.insertRow(1, row);
     });
+    return common.Promise.all(promises)
+        .then(function(){
+            var reply = {received: `${rows.length} rows`};
+            res.setHeader('content-type', 'application/json');
+            res.end(JSON.stringify(reply));
+            if(!printed){
+                printed = true;
+                console.log(reply);
+            }
+        })
+});
 
 app.listen(+process.argv[2] || 3000);
 process.on('STOP', function () {

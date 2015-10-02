@@ -1,7 +1,8 @@
 {
-  "user": "dev",
-  "password": "blue96jade",
-  "host": "mysql1",
-  "database": "testdb",
+  "user": "undefined",
+  "password": "undefined",
+  "host": "undefined",
+  "database": "benchmark_scratch_db",
+  "namedPlaceholders": true,
   "connectionLimit": 20
 }

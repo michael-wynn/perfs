@@ -3,12 +3,11 @@ var express = require('express');
 var common = require('../../../lib/common');
 
 var app = express();
-
 app.get('/mysql-get', function (req, res, next) {
-    return common.mysqlExecute(common.query.mysqlGet)
+    return common.mysql.selectAll()
         .then(function (data) {
             res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify(data[0]));
+            res.end(JSON.stringify(data));
         })
         .catch(next)    //will not handle promise errors properly without this
         ;
@@ -21,7 +20,11 @@ app.get('/mysql-get', function (req, res, next) {
         });
     });
 
-app.listen(+process.argv[2] || 3000);
 process.on('STOP', function () {
     process.exit(0)
 });
+
+common.mysql.initialize()
+    .then(function(){
+        app.listen(+process.argv[2] || 3000);
+    })

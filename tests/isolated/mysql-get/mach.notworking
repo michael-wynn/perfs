@@ -1,0 +1,21 @@
+'use strict';
+var mach = require('mach');
+var common = require('../../../lib/common');
+var Blue = require('bluebird');
+
+var app = mach.stack();
+
+app.get('/mysql-get', function (conn) {
+    return common.mysql.selectAll()
+        .then(function(data){
+            console.log(data); //will print correct data to console
+            return data;       //but will not make it to the response, why?
+        }));
+});
+
+common.mysql.initialize()
+    .then(function(){
+        mach.serve(app, {port: process.argv[2] || 3000});
+    });
+
+

@@ -4,7 +4,7 @@ var common = require('../../../lib/common.js');
 
 var app = express();
 
-app.set('views', common.jadeViews);
+app.set('views', common.jadeViewsDir);
 app.set('view engine', 'jade');
 
 app.use('/jade', function (req, res, next) {
