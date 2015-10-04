@@ -6,9 +6,9 @@ var printed = false;
 
 var app = new necklace.App();
 app
-    .before((new necklace.middies.BodyParser('json', 'requestBody')))
-    .mount('mysql-insert', function () {
-        var rows = this.store['requestBody'];
+    .before(necklace.middies.BodyParser.json)
+    .route('mysql-insert', function () {
+        var rows = this.req.body;
         var promises = rows.map(function(row){
             return common.mysql.insertRow(1, row);
         });

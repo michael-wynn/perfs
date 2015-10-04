@@ -5,8 +5,8 @@ var StaticFolder = require('necklace-static-folder');
 var app = new necklace.App();
 
 app
-    .mount(new StaticFolder('files'))   //necklace serves (cwd)/files to /files, not to root (/)
-    .mount('hello-world', function () {
+    .route(new StaticFolder('files'))   //necklace serves (cwd)/files to /files, not to root (/)
+    .route('hello-world', function () {
         this.sendText('Hello World');
     });
 

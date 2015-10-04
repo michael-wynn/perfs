@@ -17,7 +17,7 @@ var errorHandler = function * (next) {
     }
 };
 
-app.use(errorHandler);
+//app.use(errorHandler);
 app.use(function *(next) {
     if(this.path == '/mysql-insert') {
         var context = this;

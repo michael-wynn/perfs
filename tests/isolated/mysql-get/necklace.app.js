@@ -3,7 +3,7 @@ var necklace = require('necklace');
 var common = require('../../../lib/common');
 
 var app = new necklace.App();
-app.mount('mysql-get', function () {
+app.route('mysql-get', function () {
     return this.run(common.mysql.selectAll)
         .then(this.sendJson);
 });

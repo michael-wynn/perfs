@@ -3,7 +3,7 @@ var necklace = require('necklace');
 var common = require('../../../lib/common');
 
 var app = new necklace.App();
-app.mount('json-4k', function () {
+app.route('json-4k', function () {
     this.sendJson(common.json4k);
 });
 

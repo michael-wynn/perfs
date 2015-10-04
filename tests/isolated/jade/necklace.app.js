@@ -4,7 +4,7 @@ var common = require('../../../lib/common.js');
 
 var app = new necklace.App();
 app.registerViewEngine('jade', common.jadeViewsDir, '.jade')
-    .mount('jade', function () {
+    .route('jade', function () {
         this.render('jade', 'welcome', {title: 'Jade performance test', date: new Date});
     });
 

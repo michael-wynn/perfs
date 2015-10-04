@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./tests/wrk-all.sh",
-    "test": "./tests/wrk-all.sh"
+    "start": "./tests/wrk.sh",
+    "test": "./tests/wrk.sh"
   },
   "repository": {
     "type": "git",

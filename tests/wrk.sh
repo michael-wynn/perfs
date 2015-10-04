@@ -2,7 +2,7 @@
 
 export THREADS=3
 export CONNECTIONS=1000
-export DURATION=3s
+export DURATION=15s
 export TIMEOUT=5s
 export DELAY=2
 
@@ -17,7 +17,7 @@ PORT=4827   #arbitrary seed, will increment before each test
 APPFILE="app.js"
 TESTSCRIPT="test.wrk.sh"
 OUTEXTENSION="result"
-ALLRESULTS="tests/wrk-all.result"
+ALLRESULTS="tests/wrk.result"
 
 #clear consolidated results
 echo "Performance test results:" > $ALLRESULTS

@@ -9,11 +9,11 @@ var app = new necklace.App();
 var files = new StaticFolder('files');
 
 app
-    .mount((new necklace.Stack('files'))
-        .mount(new StaticFile('hello.html', path.join(process.cwd(), 'files/hello.html')))
-        .mount(new StaticFile('140k.js', path.join(process.cwd(), 'files/140k.js')))
+    .route((new necklace.Stack('files'))
+        .route(new StaticFile('hello.html', path.join(process.cwd(), 'files/hello.html')))
+        .route(new StaticFile('140k.js', path.join(process.cwd(), 'files/140k.js')))
 )
-    .mount('hello-world', function () {
+    .route('hello-world', function () {
         this.sendText('Hello World');
     })
 ;

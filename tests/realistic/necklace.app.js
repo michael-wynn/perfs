@@ -7,8 +7,8 @@ var app = new necklace.App();
 var files = new StaticFolder('files');
 
 app
-    .mount(files)
-    .mount('/', function () {
+    .route(files)
+    .route('/', function () {
     this.sendText('Hello World');
 })
 ;

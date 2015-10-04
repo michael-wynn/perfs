@@ -2,7 +2,7 @@
 var necklace = require('necklace');
 var app = new necklace.App();
 
-app.mount('hello-world', function () {
+app.route('hello-world', function () {
     this.sendText('Hello World');
 });
 
