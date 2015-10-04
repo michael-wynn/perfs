@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-export THREADS=3
-export CONNECTIONS=1000
-export DURATION=15s
+export THREADS=2
+export CONNECTIONS=100
+export DURATION=10s
 export TIMEOUT=5s
-export DELAY=2
+export DELAY=60
 
 GRP=$1
 TST=$2
