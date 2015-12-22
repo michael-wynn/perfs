@@ -4,7 +4,7 @@ export THREADS=2
 export CONNECTIONS=100
 export DURATION=10s
 export TIMEOUT=5s
-export DELAY=60
+export DELAY=2
 
 GRP=$1
 TST=$2

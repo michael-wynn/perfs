@@ -18,6 +18,7 @@
     "body-parser": "^1.14.1",
     "co-body": "^4.0.0",
     "debug": "^2.2.0",
+    "ejs": "^2.3.4",
     "express": "^4.13.3",
     "hapi": "^10.1.0",
     "inert": "^3.0.2",
@@ -30,8 +31,14 @@
     "mysql": "^2.9.0",
     "mysql2": "^0.15.8",
     "necklace": "0.0.0",
+    "necklace-fast-folder": "0.0.1",
     "necklace-static-file": "0.0.1",
     "necklace-static-folder": "0.0.1",
+    "serve-favicon": "^2.3.0",
     "vision": "^3.0.0"
+  },
+  "devDependencies": {
+    "req-fast": "^0.2.9",
+    "request": "^2.65.0"
   }
 }

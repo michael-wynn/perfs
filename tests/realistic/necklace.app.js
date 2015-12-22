@@ -1,17 +1,12 @@
 'use strict';
 var necklace = require('necklace');
-var StaticFolder = require('necklace-static-folder');
+var common = require('../../lib/common.js');
+var path = require('path');
 
 var app = new necklace.App();
 
-var files = new StaticFolder('files');
-
-app
-    .route(files)
-    .route('/', function () {
-    this.sendText('Hello World');
-})
-;
+app.registerViewEngine('jade', common.jadeViewsDir, '.jade')
+    .map(path.join(process.cwd(), 'lib/necklace'));
 
 app.listen(+process.argv[2] || 3000);
 process.on('STOP', function () {
